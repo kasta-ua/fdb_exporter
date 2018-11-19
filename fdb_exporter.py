@@ -53,6 +53,14 @@ class FdbCollector(object):
             'Total number of started transactions',
             value=data['cluster']['workload']['transactions']['started']['counter'])
 
+        yield CounterMetricFamily('fdb_latency_read_seconds',
+            'Time to perform a single read',
+            value=data['cluster']['latency_probe']['read_seconds'])
+
+        yield CounterMetricFamily('fdb_latency_commit_seconds',
+            'Time to commit a sample transaction',
+            value=data['cluster']['latency_probe']['commit_seconds'])
+
 
 REGISTRY.register(FdbCollector())
 
