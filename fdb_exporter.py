@@ -29,27 +29,27 @@ class FdbCollector(object):
         data = json.loads(read_metrics(self.db).decode())
 
         # https://github.com/apple/foundationdb/issues/398
-        yield GaugeMetricFamily('fdb_workload_operations_reads_per_second', 
+        yield GaugeMetricFamily('fdb_workload_operations_reads_per_second',
             'Read operations per second',
             value=data['cluster']['workload']['operations']['reads']['hz'])
 
-        yield GaugeMetricFamily('fdb_workload_operations_writes_per_second', 
+        yield GaugeMetricFamily('fdb_workload_operations_writes_per_second',
             'Total number of write operations',
             value=data['cluster']['workload']['operations']['writes']['hz'])
 
-        yield CounterMetricFamily('fdb_workload_operations_writes_total', 
+        yield CounterMetricFamily('fdb_workload_operations_writes_total',
             'Total number of write operations',
             value=data['cluster']['workload']['operations']['writes']['counter'])
 
-        yield CounterMetricFamily('fdb_workload_transactions_committed_total', 
+        yield CounterMetricFamily('fdb_workload_transactions_committed_total',
             'Total number of committed transactions',
             value=data['cluster']['workload']['transactions']['committed']['counter'])
 
-        yield CounterMetricFamily('fdb_workload_transactions_conflicted_total', 
+        yield CounterMetricFamily('fdb_workload_transactions_conflicted_total',
             'Total number of transaction conflicts',
             value=data['cluster']['workload']['transactions']['conflicted']['counter'])
 
-        yield CounterMetricFamily('fdb_workload_transactions_started_total', 
+        yield CounterMetricFamily('fdb_workload_transactions_started_total',
             'Total number of started transactions',
             value=data['cluster']['workload']['transactions']['started']['counter'])
 
